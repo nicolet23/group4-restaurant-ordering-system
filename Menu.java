@@ -21,27 +21,34 @@ public class Menu {
 
     // Add one item to the menu.
     public void addItem(MenuItem item) {
-        // TODO: add 'item' to the items list
+        items.add(item);
     }
 
     // Print every item on the menu, one per line.
     public void displayMenu() {
-        // TODO: use a for loop to go through 'items' and print each one
-        System.out.println("(displayMenu not implemented yet)");
+        for (MenuItem item : items) {
+            System.out.println(item);
+        }
     }
 
     // Search the menu for the item with this id.
     // Return that MenuItem, or return null if no item has that id.
     public MenuItem findItemById(int id) {
-        // TODO: loop through 'items'; if an item's getId() == id, return that item
-        return null;   // placeholder so the file still compiles
+        for (MenuItem item : items) {
+            if (item.getId() == id) {
+                return item;
+            }
+        }
+        return null; 
     }
 
     // Print only the items whose category matches the one passed in.
     public void displayByCategory(String category) {
-        // TODO: loop through 'items'; print each item whose getCategory() equals category
-        //       (use an if statement inside the loop)
-        System.out.println("(displayByCategory not implemented yet)");
+        for(MenuItem item : items) {
+            if (item.getCategory().equals(category)) {
+                System.out.println(item);
+            }
+        }
     }
 
     // -----------------------------------------------------------------------
