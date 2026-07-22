@@ -20,6 +20,13 @@ public class RestaurantApp {
         Menu menu = new Menu();
         Order order = new Order();
 
+        // A few coupon codes the customer can use at checkout.
+        // (This is an ARRAY of Discount objects.)
+        Discount[] coupons = {
+            new Discount("STUDENT10", 0.10),   // 10% off
+            new Discount("WELCOME5", 0.05)     // 5% off
+        };
+
         // Fill the menu with some starter items so it isn't empty.
         // (Jahson: this is placeholder data — feel free to replace it with the
         //  fuller sample menu you create.)
@@ -62,6 +69,26 @@ public class RestaurantApp {
             } else if (choice == 5) {
                 System.out.println("\n----- RECEIPT -----");
                 order.printReceipt();
+
+                // Ask for an optional coupon code and apply it if it matches.
+                double total = order.calculateTotal();
+                String code = readLine(input, "Enter a coupon code (or press Enter to skip): ");
+                if (!code.isEmpty()) {
+                    Discount applied = null;
+                    for (Discount d : coupons) {      // search the array
+                        if (d.matches(code)) {
+                            applied = d;
+                        }
+                    }
+                    if (applied != null) {
+                        System.out.printf("Coupon %s applied! You saved $%.2f%n",
+                                          applied.getCode(), applied.amountOff(total));
+                        System.out.printf("New total: $%.2f%n", applied.applyTo(total));
+                    } else {
+                        System.out.println("Coupon code not recognized. No discount applied.");
+                    }
+                }
+
                 System.out.println("Thank you for your order!");
                 running = false;
 
@@ -99,12 +126,23 @@ public class RestaurantApp {
 
     // Reads a whole number from the user. If they type something that is not a
     // number, it asks again instead of crashing. Returns the number entered.
+    // Reading a full line (instead of nextInt) keeps number input and text
+    // input (like the coupon code) from interfering with each other.
     private static int readInt(Scanner input, String prompt) {
-        System.out.print(prompt);
-        while (!input.hasNextInt()) {
-            input.next();  // throw away the invalid input
-            System.out.print("Please enter a whole number: ");
+        while (true) {
+            System.out.print(prompt);
+            String line = input.nextLine().trim();
+            try {
+                return Integer.parseInt(line);
+            } catch (NumberFormatException e) {   // exception handling
+                System.out.println("Please enter a whole number.");
+            }
         }
-        return input.nextInt();
+    }
+
+    // Reads a line of text from the user and returns it (trimmed).
+    private static String readLine(Scanner input, String prompt) {
+        System.out.print(prompt);
+        return input.nextLine().trim();
     }
 }
