@@ -1,15 +1,9 @@
 // Menu.java
 // ---------------------------------------------------------------------------
-// OWNER: Yiru
+// OWNER: Runhan Tang
 //
-// Holds every MenuItem the restaurant offers, stored in an ArrayList.
-//
-// HOW TO WORK ON THIS FILE:
-//   - Fill in the method bodies wherever you see "// TODO".
-//   - You can run THIS file by itself (it has its own main at the bottom) to
-//     test your work before the whole project is put together.
-//   - The method names and parameters are already agreed on by the group,
-//     so please keep them the same; just write what goes inside.
+// Holds every MenuItem the restaurant offers, stored in an ArrayList, and can
+// display them or search for one by id or category.
 // ---------------------------------------------------------------------------
 
 import java.util.ArrayList;
@@ -26,7 +20,11 @@ public class Menu {
 
     // Print every item on the menu, one per line.
     public void displayMenu() {
-        for (MenuItem item : items) {
+        if (items.isEmpty()) {
+            System.out.println("The menu is empty.");
+            return;
+        }
+        for (MenuItem item : items) {   // repetition structure
             System.out.println(item);
         }
     }
@@ -35,26 +33,24 @@ public class Menu {
     // Return that MenuItem, or return null if no item has that id.
     public MenuItem findItemById(int id) {
         for (MenuItem item : items) {
-            if (item.getId() == id) {
+            if (item.getId() == id) {   // decision structure
                 return item;
             }
         }
-        return null; 
+        return null;
     }
 
     // Print only the items whose category matches the one passed in.
     public void displayByCategory(String category) {
-        for(MenuItem item : items) {
-            if (item.getCategory().equals(category)) {
+        for (MenuItem item : items) {
+            if (item.getCategory().equalsIgnoreCase(category)) {
                 System.out.println(item);
             }
         }
     }
 
     // -----------------------------------------------------------------------
-    // STANDALONE TEST — run this file on its own to check your own work.
-    // (This main is only used when you run Menu directly; RestaurantApp has
-    //  its own main and does not use this one.)
+    // STANDALONE TEST — run this file on its own to check the Menu class.
     // -----------------------------------------------------------------------
     public static void main(String[] args) {
         Menu menu = new Menu();
