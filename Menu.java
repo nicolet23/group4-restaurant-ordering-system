@@ -1,6 +1,6 @@
 // Menu.java
 // ---------------------------------------------------------------------------
-// OWNER: Yiru
+// OWNER: Runhan Tang
 //
 // Holds every MenuItem the restaurant offers, stored in an ArrayList, and can
 // display them or search for one by id or category.
