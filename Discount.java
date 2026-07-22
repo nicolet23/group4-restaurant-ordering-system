@@ -1,6 +1,6 @@
 // Discount.java
 // ---------------------------------------------------------------------------
-// OWNER: Jahson
+// OWNER: Runhan Tang
 //
 // A simple coupon. Each Discount has a code (like "STUDENT10") and a percentage
 // off (like 0.10 for 10% off). The main program keeps a few of these and checks
