@@ -30,7 +30,7 @@ public class RestaurantApp {
         boolean running = true;
         while (running) {                       // repetition structure
             printOptions();
-            int choice = readInt(input, "Choose an option (1-5): ");
+            int choice = readInt(input, "Choose an option (1-6): ");
 
             if (choice == 1) {                  // decision structure
                 System.out.println("\n----- MENU -----");
@@ -55,17 +55,22 @@ public class RestaurantApp {
                 }
 
             } else if (choice == 4) {
+                // Show the order so far without ending the program.
+                System.out.println("\n----- YOUR CURRENT ORDER -----");
+                order.printReceipt();
+
+            } else if (choice == 5) {
                 System.out.println("\n----- RECEIPT -----");
                 order.printReceipt();
                 System.out.println("Thank you for your order!");
                 running = false;
 
-            } else if (choice == 5) {
+            } else if (choice == 6) {
                 System.out.println("Goodbye!");
                 running = false;
 
             } else {
-                System.out.println("Please enter a number from 1 to 5.");
+                System.out.println("Please enter a number from 1 to 6.");
             }
             System.out.println();
         }
@@ -87,8 +92,9 @@ public class RestaurantApp {
         System.out.println("1. View menu");
         System.out.println("2. Add item to order");
         System.out.println("3. Remove item from order");
-        System.out.println("4. Checkout");
-        System.out.println("5. Quit");
+        System.out.println("4. View current order");
+        System.out.println("5. Checkout");
+        System.out.println("6. Quit");
     }
 
     // Reads a whole number from the user. If they type something that is not a
